@@ -22,6 +22,7 @@ type Post = {
   image: string;
   thumbnail: string;
   publishedAt: string;
+  slug: string;
 };
 
 type Categorie = {
@@ -34,16 +35,22 @@ type HomeProps = {
   posts: Post[];
   lastPosts: Post[];
   categories: Categorie[];
+  allPostsCount: number;
 };
 
-export default function Home({ posts, categories, lastPosts }: HomeProps) {
+export default function Home({
+  posts,
+  categories,
+  lastPosts,
+  allPostsCount,
+}: HomeProps) {
   return (
     <HomeContainer>
       <Head>
         <title>CookChef - Index</title>
       </Head>
 
-      <Main />
+      <Main count={allPostsCount} />
 
       <Categories categories={categories} />
 
@@ -60,6 +67,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const postsData = await api.get('posts', {
     params: {
       _limit: 9,
+      _sort: 'id:DESC',
     },
   });
 
@@ -71,6 +79,7 @@ export const getStaticProps: GetStaticProps = async () => {
       author: post.author,
       category: post.category.name,
       image: post.cover.url,
+      slug: post.slug,
       thumbnail: post.cover.formats.thumbnail.url,
       publishedAt: format(parseISO(post.published_at), 'd MMM yy', {
         locale: ptBR,
@@ -90,8 +99,11 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   });
 
+  const allPostsCountData = await api.get('posts/count');
+  const allPostsCount = allPostsCountData.data;
+
   return {
-    props: { posts, lastPosts, categories },
+    props: { posts, lastPosts, categories, allPostsCount },
     revalidate: 60 * 60, // 1hour
   };
 };

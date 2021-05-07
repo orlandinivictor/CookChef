@@ -49,7 +49,6 @@ export const CategoriesContent = styled.div`
     background: ${({ theme }) => theme.darkTheme.colors.primary};
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
 
     margin: 0.5rem;
     padding: 4rem;

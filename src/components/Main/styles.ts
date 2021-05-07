@@ -18,7 +18,8 @@ export const SliderContainer = styled.div`
 
     img {
       width: 100%;
-      filter: brightness(0.5);
+      filter: brightness(0.35) blur(5px);
+      object-fit: cover;
     }
 
     span {

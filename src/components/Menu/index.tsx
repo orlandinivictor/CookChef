@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { MenuContainer, MenuNav } from './styles';
 
 export const Menu = () => {
@@ -8,13 +10,19 @@ export const Menu = () => {
       <MenuNav>
         <ul>
           <li>
-            <a href="">Home</a>
+            <Link href="/">
+              <a>Home</a>
+            </Link>
           </li>
           <li>
-            <a href="">Chef&rsquo;s</a>
+            <Link href="/">
+              <a>Chef&rsquo;s</a>
+            </Link>
           </li>
           <li>
-            <a href="">Contato</a>
+            <Link href="/">
+              <a href="">Contato</a>
+            </Link>
           </li>
         </ul>
       </MenuNav>

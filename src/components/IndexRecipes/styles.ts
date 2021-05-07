@@ -46,6 +46,7 @@ export const Card = styled.div`
     img {
       width: 50%;
       height: 17rem;
+      object-fit: cover;
     }
 
     div {
@@ -60,9 +61,9 @@ export const Card = styled.div`
         white-space: nowrap;
       }
 
-      p {
+      span {
         display: -webkit-box;
-        -webkit-line-clamp: 8;
+        -webkit-line-clamp: 10;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;

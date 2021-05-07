@@ -94,9 +94,25 @@ export const FooterContainer = styled.footer`
 
       margin: 1rem 0;
 
+      h4 {
+        a {
+          color: ${({ theme }) => theme.darkTheme.colors.primary};
+          padding: 0.5rem 0.5rem;
+          text-decoration: none;
+
+          transition: all 0.2s;
+
+          &:hover {
+            color: rgba(60, 140, 220, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+
       img {
-        width: 6rem;
-        height: 4rem;
+        width: 7rem;
+        height: 5.5rem;
+        object-fit: cover;
 
         box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.4);
       }

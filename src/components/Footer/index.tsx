@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { FooterContainer } from './styles';
 
 import {
@@ -17,13 +19,15 @@ type Post = {
   id: number;
   thumbnail: string;
   title: string;
+  slug: string;
 };
 
 type FooterProps = {
-  posts: Post[];
+  posts?: Post[];
+  post?: Post;
 };
 
-export const Footer = ({ posts }: FooterProps) => {
+export const Footer = ({ posts, post }: FooterProps) => {
   return (
     <FooterContainer>
       <div className="content">
@@ -98,22 +102,38 @@ export const Footer = ({ posts }: FooterProps) => {
         </ul>
       </div>
 
-      <div className="content">
-        <h3>Utimas receitas</h3>
-        <hr />
-        {posts.map((post) => (
-          <div key={post.id}>
-            <img src={`${post.thumbnail}`} alt={post.title} />
+      {posts ? (
+        <div className="content">
+          <h3>Utimas receitas</h3>
+          <hr />
+          {posts.map((post) => (
+            <div key={post.id}>
+              <img src={`${post.thumbnail}`} alt={post.title} />
+              <div className="details">
+                <h4>
+                  <Link href={`/recipe/${post.slug}`}>{post.title}</Link>
+                </h4>
+                <span>
+                  <IoMdTime size={12} color="red" />{' '}
+                  <strong>{post.id * 10}min</strong>
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="content">
+          <h3>Bom Apetite!</h3>
+          <hr />
+          <div>
+            <img src={post.thumbnail} alt={post.title} />
             <div className="details">
-              <h4>{post.title}</h4>
-              <span>
-                <IoMdTime size={12} color="red" />{' '}
-                <strong>{post.id * 10}min</strong>
-              </span>
+              <h4>Aproveite o seu {post.title}</h4>
+              <strong>Espero que tenha dado certo!</strong>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </FooterContainer>
   );
 };
